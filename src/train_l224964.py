@@ -18,7 +18,8 @@ else:
     X, y = fetch_california_housing(return_X_y=True)
 
 print(f"[{STUDENT_ID}] Loaded data with shape {X.shape}")
-# SCALING_STEP
+from sklearn.preprocessing import StandardScaler
+X = StandardScaler().fit_transform(X)
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
 model = RandomForestRegressor(n_estimators=N_ESTIMATORS, max_depth=MAX_DEPTH, random_state=42).fit(X_tr, y_tr)
