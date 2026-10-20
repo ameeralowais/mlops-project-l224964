@@ -9,6 +9,7 @@ STUDENT_ID = "l224964"
 DATA_PATH = "data/dataset.csv"
 N_ESTIMATORS = 100
 MAX_DEPTH = 10
+MIN_SAMPLES_LEAF = 2
 
 if os.path.exists(DATA_PATH):
     df = pd.read_csv(DATA_PATH)
@@ -25,8 +26,10 @@ X = MinMaxScaler().fit_transform(X)
 
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.2, random_state=42)
 
-model = RandomForestRegressor(n_estimators=N_ESTIMATORS, max_depth=MAX_DEPTH, random_state=42).fit(X_tr, y_tr)
+model = RandomForestRegressor(n_estimators=N_ESTIMATORS, max_depth=MAX_DEPTH, min_samples_leaf=MIN_SAMPLES_LEAF , random_state=42).fit(X_tr, y_tr)
 print(f"[{STUDENT_ID}] R2 score: {model.score(X_te, y_te):.3f}")
 
 os.makedirs("model", exist_ok=True)
 joblib.dump(model, f"model/model_{STUDENT_ID}.pkl")
+
+# this is train _l224964.py file
